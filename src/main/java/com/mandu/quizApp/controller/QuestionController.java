@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -17,9 +18,10 @@ public class QuestionController {
     QuestionService questionService;
 
     @GetMapping("allQuestions")
-    public List<Question> getAllQuestions(){
+    public ResponseEntity<List<Question>> getAllQuestions(){
         return questionService.getAllQuestions();
-    }
+    };
+
 
     @GetMapping("category/{category}")
     public List<Question> getQuestionsByCategory(@PathVariable String category){
@@ -28,9 +30,22 @@ public class QuestionController {
 
     @PostMapping("add")
     public ResponseEntity<Question> addQuestion(@RequestBody Question question){
-        Question addedQuestion = questionService.addQuestion(question);
-        return ResponseEntity.status(HttpStatus.CREATED).body(addedQuestion);
+        return questionService.addQuestion(question);
 
+    };
+
+    //update question
+    @PutMapping("update")
+    public ResponseEntity<Question> updateQuestion(@RequestBody Question question){
+        Question updatedQuestion = questionService.updateQuestion(question);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedQuestion);
+    };
+
+    //delete question
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<String> deleteQuestion(@PathVariable int id){
+        questionService.deleteQuestion(id);
+        return ResponseEntity.status(HttpStatus.OK).body("Question deleted successfully");
     };
 
 }
