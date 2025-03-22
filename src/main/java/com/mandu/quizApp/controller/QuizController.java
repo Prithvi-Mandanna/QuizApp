@@ -1,14 +1,14 @@
 package com.mandu.quizApp.controller;
 
+import com.mandu.quizApp.entity.QuestionWrapper;
 import com.mandu.quizApp.entity.Quiz;
+import com.mandu.quizApp.entity.Response;
 import com.mandu.quizApp.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("quiz")
@@ -21,5 +21,17 @@ public class QuizController {
     public ResponseEntity<Quiz> createQuiz(@RequestParam String category, @RequestParam int numQ, @RequestParam String title  ){
       return quizService.createQuiz(category, numQ, title);
     };
+
+    @GetMapping("get/{quizId}")
+    public ResponseEntity<List<QuestionWrapper>> getQuestionsbyQuizId(@PathVariable Integer quizId){
+        return quizService.getQuizQuestionsByQuizId(quizId);
+    };
+
+    @PostMapping("submit/{id}")
+    public ResponseEntity<Integer> submitQuiz(@PathVariable Integer id, @RequestBody List<Response> responses) {
+        return quizService.calculateResult(id, responses);
+
+
+    }
 
 }
