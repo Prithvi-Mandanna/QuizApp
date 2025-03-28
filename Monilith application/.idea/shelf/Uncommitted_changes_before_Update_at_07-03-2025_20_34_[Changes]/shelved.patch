@@ -1,0 +1,13 @@
+Index: quizApp/README.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># git-learning\r\n# git-learning\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-16LE
+===================================================================
+diff --git a/quizApp/README.md b/quizApp/README.md
+--- a/quizApp/README.md	(revision 5169f2b5232ba3fb718eb7f900b4edd9a8d90695)
++++ b/quizApp/README.md	(date 1741359858079)
+@@ -1,2 +1,0 @@
+-# git-learning
+-# git-learning
